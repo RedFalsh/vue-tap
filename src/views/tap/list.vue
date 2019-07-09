@@ -1,12 +1,8 @@
 <template>
   <div class="app-container">
     <el-tabs @tab-click="tabClick">
-      <el-tab-pane
-        :key="item"
-        v-for="(item, index) in positions"
-        :label="item"
-        >
-        <el-row :gutter="24" v-for="tap in list">
+      <el-tab-pane :key="item" v-for="item in positions" :label="item">
+        <el-row :gutter="24" :key="tap" v-for="tap in list">
           <el-col :span="12">
             <el-card class="box-card" shadow="hover">
               <div slot="header" class="clearfix">
@@ -25,21 +21,21 @@
               </div>
               <div class="tap">
                 <div class="left">
-                  <span> {{tap.alias1}} </span>
-                  <span style="color:red;" v-if="tap.online==0"> 设备离线 </span>
-                  <span style="color:green;" v-else-if="tap.online==1"> 设备在线 </span>
-                  <span style="color:green;" v-else> 设备异常 </span>
-                  <span style="color:green;" > {{tap.sn}} </span>
-                  <svg-icon icon-class="tap" style="font-size:40px;"/>
+                  <span>{{tap.alias1}}</span>
+                  <span style="color:red;" v-if="tap.online==0">设备离线</span>
+                  <span style="color:green;" v-else-if="tap.online==1">设备在线</span>
+                  <span style="color:green;" v-else>设备异常</span>
+                  <span style="color:green;">{{tap.sn}}</span>
+                  <svg-icon icon-class="tap" style="font-size:40px;" />
                 </div>
                 <div class="right">
-                  <span style="color:red;" v-if="tap.status1==0"> 已关闭 </span>
-                  <span style="color:green;" v-else-if="tap.status1==1"> 已开启 </span>
-                  <span style="color:blue;" v-else-if="tap.status1==2"> 半开 </span>
-                  <span style="color:green;" v-else-if="tap.status1==3"> 开启中... </span>
-                  <span style="color:red;" v-else-if="tap.status1==4"> 关闭中... </span>
-                  <span style="color:red;" v-else> 状态异常 </span>
-                  <span style="color:green;" > 电量：{{tap.power}} V </span>
+                  <span style="color:red;" v-if="tap.status1==0">已关闭</span>
+                  <span style="color:green;" v-else-if="tap.status1==1">已开启</span>
+                  <span style="color:blue;" v-else-if="tap.status1==2">半开</span>
+                  <span style="color:green;" v-else-if="tap.status1==3">开启中...</span>
+                  <span style="color:red;" v-else-if="tap.status1==4">关闭中...</span>
+                  <span style="color:red;" v-else>状态异常</span>
+                  <span style="color:green;">电量：{{tap.power}} V</span>
                   <el-row>
                     <el-button type="success" @click.stop="openTap(1, tap)">打开</el-button>
                     <el-button type="danger" @click.stop="closeTap(1, tap)">关闭</el-button>
@@ -66,20 +62,20 @@
               </div>
               <div class="tap">
                 <div class="left">
-                  <span> {{tap.alias2}} </span>
-                  <span style="color:red;" v-if="tap.online==0"> 设备离线 </span>
-                  <span style="color:green;" v-else-if="tap.online==1"> 设备在线 </span>
-                  <span style="color:green;" v-else> 设备异常 </span>
-                  <svg-icon icon-class="tap" style="font-size:40px;"/>
+                  <span>{{tap.alias2}}</span>
+                  <span style="color:red;" v-if="tap.online==0">设备离线</span>
+                  <span style="color:green;" v-else-if="tap.online==1">设备在线</span>
+                  <span style="color:green;" v-else>设备异常</span>
+                  <svg-icon icon-class="tap" style="font-size:40px;" />
                 </div>
                 <div class="right">
-                  <span style="color:red;" v-if="tap.status2==0"> 已关闭 </span>
-                  <span style="color:green;" v-else-if="tap.status2==1"> 已开启 </span>
-                  <span style="color:blue;" v-else-if="tap.status2==2"> 半开 </span>
-                  <span style="color:green;" v-else-if="tap.status2==3"> 开启中... </span>
-                  <span style="color:red;" v-else-if="tap.status2==4"> 关闭中... </span>
-                  <span style="color:red;" v-else> 状态异常 </span>
-                  <span style="color:green;" > 电量：{{tap.power}} V </span>
+                  <span style="color:red;" v-if="tap.status2==0">已关闭</span>
+                  <span style="color:green;" v-else-if="tap.status2==1">已开启</span>
+                  <span style="color:blue;" v-else-if="tap.status2==2">半开</span>
+                  <span style="color:green;" v-else-if="tap.status2==3">开启中...</span>
+                  <span style="color:red;" v-else-if="tap.status2==4">关闭中...</span>
+                  <span style="color:red;" v-else>状态异常</span>
+                  <span style="color:green;">电量：{{tap.power}} V</span>
                   <el-row>
                     <el-button type="success" @click.stop="openTap(2, tap)">打开</el-button>
                     <el-button type="danger" @click.stop="closeTap(2, tap)">关闭</el-button>
@@ -89,7 +85,13 @@
             </el-card>
           </el-col>
         </el-row>
-        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
+        <pagination
+          v-show="total>0"
+          :total="total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.limit"
+          @pagination="fetchData"
+        />
       </el-tab-pane>
     </el-tabs>
 
@@ -113,34 +115,29 @@
         <el-button type="primary" @click="updateSaveInfo">更新并保存</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
 
 <script>
-import {
-  tapList,
-  tapPositionList,
-  tapEdit
-} from '@/api/tap'
-import waves from '@/directive/waves' // waves directive
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import { tapList, tapPositionList, tapEdit } from "@/api/tap";
+import waves from "@/directive/waves"; // waves directive
+import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
 
 export default {
-  name: 'find',
+  name: "find",
   components: { Pagination },
   directives: { waves },
   filters: {
     statusFilter(status) {
       const statusMap = {
-        0: 'success',
-        1: 'danger'
-      }
-      return statusMap[status]
+        0: "success",
+        1: "danger"
+      };
+      return statusMap[status];
     },
     typeFilter(type) {
-      return calendarTypeKeyValue[type]
+      return calendarTypeKeyValue[type];
     }
   },
   data() {
@@ -158,7 +155,7 @@ export default {
       },
       positions: [],
       dialogFormVisible: false,
-      formLabelWidth: '100px',
+      formLabelWidth: "100px",
       form: {
         sn: null,
         position: null,
@@ -168,171 +165,191 @@ export default {
         alias2: null,
         status2: null
       }
-    }
+    };
   },
   created() {
-    this.getPositionList()
-    this.fetchData()
+    this.getPositionList();
+    this.fetchData();
   },
   methods: {
     dateFormat(time) {
-      var date=new Date(time);
-      var year=date.getFullYear();
+      var date = new Date(time);
+      var year = date.getFullYear();
       /* 在日期格式中，月份是从0开始的，因此要加0
        * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
        * */
-      var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-      var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
-      var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
-      var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
-      var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
+      var month =
+        date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1;
+      var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+      var hours =
+        date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+      var minutes =
+        date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      var seconds =
+        date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
       // 拼接
-      return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+      return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day +
+        " " +
+        hours +
+        ":" +
+        minutes +
+        ":" +
+        seconds
+      );
     },
     fetchData() {
-      this.listLoading = true
+      this.listLoading = true;
       if (this.listQuery.datetimeStart) {
-        this.listQuery.datetimeStart=this.dateFormat(this.listQuery.datetimeStart)
+        this.listQuery.datetimeStart = this.dateFormat(
+          this.listQuery.datetimeStart
+        );
       }
       if (this.listQuery.datetimeEnd) {
-        this.listQuery.datetimeEnd=this.dateFormat(this.listQuery.datetimeEnd)
+        this.listQuery.datetimeEnd = this.dateFormat(
+          this.listQuery.datetimeEnd
+        );
       }
       tapList(this.listQuery).then(response => {
-        this.listLoading = false
-        this.list = response.data.items
-        this.total = response.data.total
-        this.doSubscribe()
-      })
+        this.listLoading = false;
+        this.list = response.data.items;
+        this.total = response.data.total;
+        this.doSubscribe();
+      });
     },
     handleFilter() {
-      this.listQuery.page = 1
-      this.fetchData()
+      this.listQuery.page = 1;
+      this.fetchData();
     },
     getPositionList() {
       tapPositionList().then(response => {
-        this.positions = response.data.items
-        console.log(this.positions)
-      })
+        this.positions = response.data.items;
+        console.log(this.positions);
+      });
     },
-    tabClick(tab){
-      this.listQuery.position = tab.label
-      this.handleFilter()
+    tabClick(tab) {
+      this.listQuery.position = tab.label;
+      this.handleFilter();
     },
     tapInfo(tap) {
-      this.form.alias1 = tap.alias1
-      this.form.alias2 = tap.alias2
-      this.form.position = tap.position
-      this.form.sn = tap.sn
-      this.dialogFormVisible = true
+      this.form.alias1 = tap.alias1;
+      this.form.alias2 = tap.alias2;
+      this.form.position = tap.position;
+      this.form.sn = tap.sn;
+      this.dialogFormVisible = true;
     },
     updateSaveInfo() {
-      console.log(this.form)
+      console.log(this.form);
       tapEdit(this.form).then(response => {
         this.$message({
           message: response.message,
-          type: 'success'
+          type: "success"
         });
-      })
+      });
     },
     toOperatorLog(tap) {
       this.$router.push({
-        path: 'tapOperateLog',
+        path: "tapOperateLog",
         query: tap
-      })
+      });
     },
     toClock(tap, number) {
       this.$router.push({
-        path: 'tapClock',
-        query: {tap, number}
-      })
+        path: "tapClock",
+        query: { tap, number }
+      });
     },
 
     // mqtt相关操作
     doSubscribe() {
-      var devices = this.list
-      for (var i=0; i < devices.length; i++) {
-        var topic = 'tap/'+devices[i].sn+'/pub/#'
-        console.log("订阅消息")
-        console.log(topic)
-        this.$mqtt.subscribe(topic)
+      var devices = this.list;
+      for (var i = 0; i < devices.length; i++) {
+        var topic = "tap/" + devices[i].sn + "/pub/#";
+        console.log("订阅消息");
+        console.log(topic);
+        this.$mqtt.subscribe(topic);
       }
     },
     subscribe(val) {
-      this.$mqtt.subscribe(val)
+      this.$mqtt.subscribe(val);
     },
     publish(topic, message) {
-      this.$mqtt.publish(topic, message)
+      this.$mqtt.publish(topic, message);
     },
     openTap(number, tap) {
       if (!tap.online) {
-        this.$message.error('当前设备[' + tap.sn + ']不在线,无法操作')
+        this.$message.error("当前设备[" + tap.sn + "]不在线,无法操作");
       }
-      var topic = 'tap/' + tap.sn + '/sub'
+      var topic = "tap/" + tap.sn + "/sub";
       if (number == 1) {
-        topic += '/sw1'
+        topic += "/sw1";
       }
       if (number == 2) {
-        topic += '/sw2'
+        topic += "/sw2";
       }
-      this.$mqtt.publish(topic, 'ON')
+      this.$mqtt.publish(topic, "ON");
     },
     closeTap(number, tap) {
       if (!tap.online) {
-        this.$message.error('当前设备[' + tap.sn + ']不在线,无法操作')
+        this.$message.error("当前设备[" + tap.sn + "]不在线,无法操作");
       }
-      var topic = 'tap/' + tap.sn + '/sub'
+      var topic = "tap/" + tap.sn + "/sub";
       if (number == 1) {
-        topic += '/sw1'
+        topic += "/sw1";
       }
       if (number == 2) {
-        topic += '/sw2'
+        topic += "/sw2";
       }
-      this.$mqtt.publish(topic, 'OFF')
+      this.$mqtt.publish(topic, "OFF");
     }
   },
   mqtt: {
-    'tap/#' (data, topic) {
-      console.log(topic + ': ' + String.fromCharCode.apply(null, data))
-      var devices = this.list
-      var patt = /^tap\/([a-zA-Z0-9]{8,10})\/pub\/(\S+)/
-      var res = patt.exec(topic)
+    "tap/#"(data, topic) {
+      console.log(topic + ": " + String.fromCharCode.apply(null, data));
+      var devices = this.list;
+      var patt = /^tap\/([a-zA-Z0-9]{8,10})\/pub\/(\S+)/;
+      var res = patt.exec(topic);
       if (res) {
-        var sn = res[1]
-        var type = res[2]
+        var sn = res[1];
+        var type = res[2];
         for (var i = 0; i < devices.length; i++) {
           if (devices[i].sn == sn) {
             if (type == "online") {
-              devices[i].online = parseInt(data)
-              break
+              devices[i].online = parseInt(data);
+              break;
             }
             if (type == "sta1") {
-              devices[i].status1 = parseInt(data)
-              break
+              devices[i].status1 = parseInt(data);
+              break;
             }
             if (type == "sta2") {
-              devices[i].status2 = parseInt(data)
-              break
+              devices[i].status2 = parseInt(data);
+              break;
             }
             if (type == "pow") {
-
-              devices[i].power = parseFloat(data).toFixed(3)
-              break
+              devices[i].power = parseFloat(data).toFixed(3);
+              break;
             }
             if (type == "info") {
-              var info = JSON.parse(data)
-              devices[i].status1 = parseInt(info["sta1"])
-              devices[i].status2 = parseInt(info["sta2"])
-              devices[i].power = parseFloat(info["pow"]).toFixed(2)
-              devices[i].online = 1
-              break
+              var info = JSON.parse(data);
+              devices[i].status1 = parseInt(info["sta1"]);
+              devices[i].status2 = parseInt(info["sta2"]);
+              devices[i].power = parseFloat(info["pow"]).toFixed(2);
+              devices[i].online = 1;
+              break;
             }
           }
         }
       }
-
     }
   }
-}
+};
 </script>
 
 <style>
@@ -348,10 +365,10 @@ export default {
   width: 100%;
   margin-top: 50px;
 }
-.tap{
+.tap {
   height: 100px;
   width: 100%;
-  margin-right:10px;
+  margin-right: 10px;
   background: white;
   display: flex;
   flex-direction: row;
@@ -378,5 +395,4 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
-
 </style>
