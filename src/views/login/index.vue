@@ -88,8 +88,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '17740171896',
-        password: '123456'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -147,7 +147,7 @@ export default {
       })
     },
     toRegister() {
-      console.log("注册")
+      console.log('注册')
       this.$router.push({ path: '/register' })
     },
     handleLogin() {

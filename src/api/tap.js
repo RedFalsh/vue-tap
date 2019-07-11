@@ -8,6 +8,14 @@ export function tapList(page) {
   })
 }
 
+export function tapInfo(sn) {
+  return request({
+    url: '/tap/info',
+    method: 'get',
+    params: { sn }
+  })
+}
+
 export function tapPositionList() {
   return request({
     url: '/tap/position/list',
@@ -35,7 +43,7 @@ export function tapClockList(sn, number) {
   return request({
     url: '/tap/clock/list',
     method: 'get',
-    params: {sn, number}
+    params: { sn, number }
   })
 }
 
@@ -59,6 +67,6 @@ export function tapClockDelete(id) {
   return request({
     url: '/tap/clock/delete',
     method: 'get',
-    params: {id}
+    params: { id }
   })
 }

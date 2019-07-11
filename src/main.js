@@ -30,7 +30,7 @@ var options = {
   username: 'admin',
   password: 'public'
 }
-Vue.use(VueMqtt, 'ws://dqtttt.cn:8083/mqtt', {clientId:'mqttjs_' + Math.random().toString(16).substr(2, 8)})
+Vue.use(VueMqtt, 'wss://mqtt.dqtttt.cn/mqtt', options)
 
 /**
  * If you don't want to use mock-server

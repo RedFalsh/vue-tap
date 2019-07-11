@@ -12,7 +12,7 @@ export function getElectronicInfo(sn) {
   return request({
     url: '/electronic/info',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -28,7 +28,7 @@ export function electronicDelete(sn) {
   return request({
     url: '/electronic/delete',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -62,7 +62,7 @@ export function electronicInCartAdd(sn) {
   return request({
     url: '/electronic/in/cart/add',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 export function electronicInCartFind(page) {
@@ -77,7 +77,7 @@ export function electronicInCartDelete(electronics) {
   return request({
     url: '/electronic/in/cart/delete',
     method: 'get',
-    params: {electronics}
+    params: { electronics }
   })
 }
 
@@ -85,7 +85,7 @@ export function electronicInOrderCreate(electronics, note) {
   return request({
     url: '/electronic/in/order/create',
     method: 'get',
-    params: {electronics, note}
+    params: { electronics, note }
   })
 }
 
@@ -100,7 +100,7 @@ export function electronicInOrderInfo(sn) {
   return request({
     url: '/electronic/in/order/info',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -108,7 +108,7 @@ export function electronicInStock(sn) {
   return request({
     url: '/electronic/in/order/instock',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -116,7 +116,7 @@ export function electronicOutCartAdd(sn) {
   return request({
     url: '/electronic/out/cart/add',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -132,7 +132,7 @@ export function electronicOutCartDelete(electronics) {
   return request({
     url: '/electronic/out/cart/delete',
     method: 'get',
-    params: {electronics}
+    params: { electronics }
   })
 }
 
@@ -140,7 +140,7 @@ export function electronicOutOrderCreate(electronics, note) {
   return request({
     url: '/electronic/out/order/create',
     method: 'get',
-    params: {electronics, note}
+    params: { electronics, note }
   })
 }
 
@@ -156,7 +156,7 @@ export function electronicOutOrderInfo(sn) {
   return request({
     url: '/electronic/out/order/info',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -164,7 +164,7 @@ export function electronicOutStock(sn) {
   return request({
     url: '/electronic/out/order/outstock',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -172,7 +172,7 @@ export function electronicFavoriteAdd(name) {
   return request({
     url: '/electronic/favorite/add',
     method: 'get',
-    params: {name}
+    params: { name }
   })
 }
 
@@ -180,7 +180,7 @@ export function electronicFavoriteDelete(name) {
   return request({
     url: '/electronic/favorite/delete',
     method: 'get',
-    params: {name}
+    params: { name }
   })
 }
 
@@ -195,7 +195,7 @@ export function electronicFavoriteInfo(sn) {
   return request({
     url: '/electronic/favorite/info',
     method: 'get',
-    params: {sn}
+    params: { sn }
   })
 }
 
@@ -203,7 +203,7 @@ export function electronicFavoriteItemAdd(name, sn) {
   return request({
     url: '/electronic/favorite/item/add',
     method: 'get',
-    params: {name, sn}
+    params: { name, sn }
   })
 }
 
@@ -211,7 +211,7 @@ export function electronicFavoriteItemList(name) {
   return request({
     url: '/electronic/favorite/item/list',
     method: 'get',
-    params: {name}
+    params: { name }
   })
 }
 
@@ -219,7 +219,7 @@ export function electronicFavoriteItemDelete(name, sn) {
   return request({
     url: '/electronic/favorite/item/delete',
     method: 'get',
-    params: {name, sn}
+    params: { name, sn }
   })
 }
 
@@ -227,6 +227,6 @@ export function electronicFavoriteItemUpdate(electronics) {
   return request({
     url: '/electronic/favorite/item/update',
     method: 'get',
-    params: {electronics}
+    params: { electronics }
   })
 }

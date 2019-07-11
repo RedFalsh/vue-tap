@@ -34,12 +34,12 @@
           <span v-if="scope.row.type==5">自定义</span>
         </template>
       </el-table-column>
-      <el-table-column prop="open_time" label="开启时间" align="center"></el-table-column>
-      <el-table-column prop="close_time" label="关闭时间" align="center"></el-table-column>
+      <el-table-column prop="open_time" label="开启时间" align="center" />
+      <el-table-column prop="close_time" label="关闭时间" align="center" />
       <el-table-column label="状态" align="center">
         <template slot-scope="scope">
-          <el-tag type="success" v-if="scope.row.alive==1">激活</el-tag>
-          <el-tag type="danger" v-if="scope.row.alive==0">未激活</el-tag>
+          <el-tag v-if="scope.row.alive==1" type="success">激活</el-tag>
+          <el-tag v-if="scope.row.alive==0" type="danger">未激活</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center">
@@ -54,18 +54,18 @@
       <el-form :model="clockForm">
         <el-form-item label="重复" :label-width="formLabelWidth">
           <el-select v-model="value" placeholder="请选重复周期">
-            <el-option label="执行一次" value="1"></el-option>
-            <el-option label="每天" value="2"></el-option>
-            <el-option label="工作日" value="3"></el-option>
-            <el-option label="周末" value="4"></el-option>
-            <el-option label="自定义" value="5"></el-option>
+            <el-option label="执行一次" value="1" />
+            <el-option label="每天" value="2" />
+            <el-option label="工作日" value="3" />
+            <el-option label="周末" value="4" />
+            <el-option label="自定义" value="5" />
           </el-select>
         </el-form-item>
         <el-form-item label="开启时间" :label-width="formLabelWidth">
-          <el-time-picker v-model="clockForm.open_time" value-format="HH:mm" placeholder="任意时间点"></el-time-picker>
+          <el-time-picker v-model="clockForm.open_time" value-format="HH:mm" placeholder="任意时间点" />
         </el-form-item>
         <el-form-item label="关闭时间" :label-width="formLabelWidth">
-          <el-time-picker v-model="clockForm.close_time" value-format="HH:mm" placeholder="任意时间点"></el-time-picker>
+          <el-time-picker v-model="clockForm.close_time" value-format="HH:mm" placeholder="任意时间点" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -78,18 +78,18 @@
       <el-form :model="clockForm">
         <el-form-item label="重复" :label-width="formLabelWidth">
           <el-select v-model="value" placeholder="请选重复周期">
-            <el-option label="执行一次" value="1"></el-option>
-            <el-option label="每天" value="2"></el-option>
-            <el-option label="工作日" value="3"></el-option>
-            <el-option label="周末" value="4"></el-option>
-            <el-option label="自定义" value="5"></el-option>
+            <el-option label="执行一次" value="1" />
+            <el-option label="每天" value="2" />
+            <el-option label="工作日" value="3" />
+            <el-option label="周末" value="4" />
+            <el-option label="自定义" value="5" />
           </el-select>
         </el-form-item>
         <el-form-item label="开启时间" :label-width="formLabelWidth">
-          <el-time-picker v-model="clockForm.open_time" value-format="HH:mm" placeholder="任意时间点"></el-time-picker>
+          <el-time-picker v-model="clockForm.open_time" value-format="HH:mm" placeholder="任意时间点" />
         </el-form-item>
         <el-form-item label="关闭时间" :label-width="formLabelWidth">
-          <el-time-picker v-model="clockForm.close_time" value-format="HH:mm" placeholder="任意时间点"></el-time-picker>
+          <el-time-picker v-model="clockForm.close_time" value-format="HH:mm" placeholder="任意时间点" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -106,76 +106,74 @@ import {
   tapClockDelete,
   tapClockEdit,
   tapClockAdd
-} from "@/api/tap";
-import waves from "@/directive/waves"; // waves directive
-import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
+} from '@/api/tap'
+import waves from '@/directive/waves' // waves directive
 
 export default {
-  name: "operatorLog",
-  components: { Pagination },
+  name: 'OperatorLog',
   directives: { waves },
   data() {
     return {
       tableKey: 0,
-      formLabelWidth: "100px",
-      sn: "",
+      formLabelWidth: '100px',
+      sn: '',
       number: 0,
       tapInfo: null,
       clockListLoading: false,
       clockList: [],
       dialogEditVisible: false,
-      value: "",
+      value: '',
       clockForm: {
-        sn: "",
-        number: "",
+        sn: '',
+        number: '',
         id: 0,
-        type: "",
-        open_time: "",
-        close_time: ""
+        type: '',
+        open_time: '',
+        close_time: ''
       },
       dialogAddVisible: false
-    };
+    }
   },
   created() {
-    this.tapInfo = this.$route.query.tap;
-    this.number = this.$route.query.number;
-    this.sn = this.tapInfo.sn;
-    this.fetchData();
+    this.tapInfo = this.$route.query.tap
+    this.number = this.$route.query.number
+    this.sn = this.tapInfo.sn
+    this.fetchData()
   },
   methods: {
     fetchData() {
-      var sn = this.tapInfo.sn;
+      var sn = this.tapInfo.sn
       if (sn) {
-        this.clockListLoading = true;
+        this.clockListLoading = true
         tapClockList(this.tapInfo.sn, this.number).then(response => {
-          this.clockListLoading = false;
-          this.clockList = response.data.items;
-        });
+          this.clockListLoading = false
+          this.clockList = response.data.items
+        })
       }
     },
     handleFilter() {
-      this.fetchData();
+      this.fetchData()
     },
     handleClockAdd() {
-      this.value = "";
-      this.clockForm.id = 0;
-      this.clockForm.type = 0;
-      this.clockForm.open_time = "";
-      this.clockForm.close_time = "";
-      this.dialogAddVisible = true;
+      this.value = ''
+      this.clockForm.id = 0
+      this.clockForm.type = 0
+      this.clockForm.open_time = ''
+      this.clockForm.close_time = ''
+      this.dialogAddVisible = true
     },
     handleClockAddOk() {
-      this.clockForm.sn = this.sn;
-      this.clockForm.number = this.number;
+      this.clockForm.sn = this.sn
+      this.clockForm.number = this.number
       if (this.value.length < 1) {
         this.$message({
-          message: "请选择重复周期",
-          type: "warning"
-        });
-        return;
+          message: '请选择重复周期',
+          type: 'warning'
+        })
+        return
       }
-      this.clockForm.type = parseInt(this.value);
-      console.log(this.clockForm);
+      this.clockForm.type = parseInt(this.value)
+      console.log(this.clockForm)
       if (
         this.clockForm.open_time.length > 1 ||
         this.clockForm.close_time.length > 1
@@ -183,65 +181,65 @@ export default {
         tapClockAdd(this.clockForm).then(response => {
           this.$message({
             message: response.message,
-            type: "success"
-          });
-          this.dialogAddVisible = false;
-          this.fetchData();
-        });
+            type: 'success'
+          })
+          this.dialogAddVisible = false
+          this.fetchData()
+        })
       } else {
         this.$message({
-          message: "请选择开启时间或关闭时间",
-          type: "warning"
-        });
+          message: '请选择开启时间或关闭时间',
+          type: 'warning'
+        })
       }
     },
     handleClockEdit(clock) {
-      this.clockForm.id = clock.id;
-      this.clockForm.type = clock.type;
-      if (clock.type == 1) {
-        this.value = "执行一次";
+      this.clockForm.id = clock.id
+      this.clockForm.type = clock.type
+      if (clock.type === 1) {
+        this.value = '执行一次'
       }
-      if (clock.type == 2) {
-        this.value = "每天";
+      if (clock.type === 2) {
+        this.value = '每天'
       }
-      if (clock.type == 3) {
-        this.value = "工作日";
+      if (clock.type === 3) {
+        this.value = '工作日'
       }
-      if (clock.type == 4) {
-        this.value = "周末";
+      if (clock.type === 4) {
+        this.value = '周末'
       }
-      if (clock.type == 5) {
-        this.value = "自定义";
+      if (clock.type === 5) {
+        this.value = '自定义'
       }
-      this.clockForm.open_time = clock.open_time;
-      this.clockForm.close_time = clock.close_time;
-      this.dialogEditVisible = true;
+      this.clockForm.open_time = clock.open_time
+      this.clockForm.close_time = clock.close_time
+      this.dialogEditVisible = true
     },
     handleClockEditOk() {
       tapClockEdit(this.clockForm).then(response => {
         this.$message({
           message: response.message,
-          type: "success"
-        });
-        this.dialogEditVisible = false;
-        this.fetchData();
-      });
+          type: 'success'
+        })
+        this.dialogEditVisible = false
+        this.fetchData()
+      })
     },
     handleClockDelete(clock) {
-      this.$confirm("是否删除此定时任务?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+      this.$confirm('是否删除此定时任务?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       }).then(() => {
         tapClockDelete(clock.id).then(response => {
           this.$message({
             message: response.message,
-            type: "success"
-          });
-          this.clockList.splice(this.clockList.indexOf(clock), 1);
-        });
-      });
+            type: 'success'
+          })
+          this.clockList.splice(this.clockList.indexOf(clock), 1)
+        })
+      })
     }
   }
-};
+}
 </script>

@@ -14,7 +14,7 @@ export default {
   components: { adminDashboard, editorDashboard },
   data() {
     return {
-      currentRole: 'adminDashboard'
+      currentRole: 'editorDashboard'
     }
   },
   computed: {
@@ -24,9 +24,7 @@ export default {
   },
   created() {
     console.log(this.roles)
-    if (!this.roles.includes('admin')) {
-      this.currentRole = 'editorDashboard'
-    }
+    this.currentRole = 'editorDashboard'
   }
 }
 </script>

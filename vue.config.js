@@ -35,17 +35,10 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/api':{
-        target: `http://dqtttt.cn:${server_port}/api`,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api':''
-        }
-      },
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
-        target: `http://dqtttt.cn:${server_port}/api`,
+        target: `http://localhost:${server_port}/api`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
