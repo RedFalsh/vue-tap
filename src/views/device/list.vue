@@ -88,13 +88,10 @@
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button
-            type="text"
-            size="small"
-            @click.native.prevent="handleClickTapInfo(scope.row.sn)"
-          >
-            详情
-          </el-button>
+          <el-button type="text" size="small" @click.native.prevent="handleClickTapInfo(scope.row.sn)"> 详情 </el-button>
+          <el-button type="text" size="small" @click.native.prevent="toOnlineLog(scope.row.sn)"> 上线记录 </el-button>
+          <el-button type="text" size="small" @click.native.prevent="toPowerLog(scope.row.sn)"> 电量记录 </el-button>
+          <el-button type="text" size="small" @click.native.prevent="toOperateLog(scope.row.sn)"> 操作记录 </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -223,6 +220,24 @@ export default {
         this.tapInfo = response.data.tap_info
         this.userInfo = response.data.user_info
         this.dialogTapInfoVisible = true
+      })
+    },
+    toOnlineLog(sn) {
+      this.$router.push({
+        path: 'device_online_log',
+        query: { sn }
+      })
+    },
+    toPowerLog(sn) {
+      this.$router.push({
+        path: 'device_power_log',
+        query: { sn }
+      })
+    },
+    toOperateLog(sn) {
+      this.$router.push({
+        path: 'device_operate_log',
+        query: { sn }
       })
     }
   }
